@@ -1,14 +1,9 @@
-define fluentd::plugin(
-  String $plugin_ensure = present,
-  Stdlib::Httpurl $plugin_source = 'https://rubygems.org',
-  Array[Variant[String, Hash]] $plugin_install_options = [],
-  String $plugin_provider = tdagent,
-) {
+define fluentd::plugin{
   package { $title:
-    ensure          => $plugin_ensure,
-    source          => $plugin_source,
-    install_options => $plugin_install_options,
-    provider        => $plugin_provider,
+    ensure          => $fluentd::params::plugin_ensure,
+    source          => $fluentd::params::plugin_source,
+    install_options => $fluentd::params::plugin_install_options,
+    provider        => $fluentd::params::plugin_provider,
     notify          => Class['Fluentd::Service'],
     require         => Class['Fluentd::Install'],
   }
