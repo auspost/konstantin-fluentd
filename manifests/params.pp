@@ -1,11 +1,12 @@
-# == Classs: fluentd::params
-
+# Classs fluentd::params
+# param defaults
+#
 class fluentd::params {
 
   $package_name   = 'td-agent'
   $package_ensure = present
 
-  $service        = 'td-agent'
+  $service_name   = 'td-agent'
   $service_ensure = running
   $service_enable = true
   $service_manage = true
@@ -16,10 +17,10 @@ class fluentd::params {
   $config_group   = 'td-agent'
   $config_mode    = '0644'
 
-  $plugin_ensure  = present
-  $plugin_source = 'https://rubygems.org'
+  $plugin_ensure   = present
+  $plugin_source   = 'https://rubygems.org'
   $plugin_install_options = []
-  $plugin_provider = tdagent
+  $plugin_provider = 'tdagent'
   $agent_user      = 'root'
   $agent_group     = 'root'
 
@@ -33,7 +34,6 @@ class fluentd::params {
     }
   }
 
-  $base_configs = hiera_hash('fluentd::system_log', {})
   $configs = {}
   $plugins = {}
 

@@ -1,10 +1,11 @@
-define fluentd::config($config) {
-  include fluentd
+# Class fluentd::config
+#
+define fluentd::config (
+  $config
+) {
 
-  file { "$fluentd::params::config_path/${title}":
-    ensure  => present,
+  file { "${fluentd::config_path}/${title}":
+    ensure  => file,
     content => fluent_config($config),
-    require => Class['Fluentd::Install'],
-    notify  => Class['Fluentd::Service'],
   }
 }
